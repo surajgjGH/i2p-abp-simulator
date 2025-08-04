@@ -1,0 +1,144 @@
+{
+  "agents": [
+    {
+      "id": "a1",
+      "triggers": [
+        "invoice_doc"
+      ],
+      "creates": [
+        "validated_invoice"
+      ],
+      "goal": "g2",
+      "capabilities": [
+        "read"
+      ]
+    },
+    {
+      "id": "a2",
+      "triggers": [
+        "validated_invoice",
+        "purchase_order",
+        "goods_receipt"
+      ],
+      "creates": [
+        "approved_invoice",
+        "exception_flag"
+      ],
+      "goal": "g3",
+      "capabilities": [
+        "read",
+        "validate"
+      ]
+    },
+    {
+      "id": "a3",
+      "triggers": [
+        "exception_flag"
+      ],
+      "creates": [
+        "approved_invoice"
+      ],
+      "goal": "g3",
+      "capabilities": [
+        "update"
+      ]
+    },
+    {
+      "id": "a3b",
+      "triggers": [
+        "approved_invoice"
+      ],
+      "creates": [
+        "invoice_posted"
+      ],
+      "goal": "g4",
+      "capabilities": [
+        "archive"
+      ]
+    },
+    {
+      "id": "a4",
+      "triggers": [
+        "invoice_posted"
+      ],
+      "creates": [
+        "payment_confirmation"
+      ],
+      "goal": "g5",
+      "capabilities": [
+        "create"
+      ]
+    },
+    {
+      "id": "a5",
+      "triggers": [
+        "payment_confirmation"
+      ],
+      "creates": [
+        "archived_invoice",
+        "remittance_notice"
+      ],
+      "goal": "g6",
+      "capabilities": [
+        "archive"
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "id": "g1",
+      "objects": [
+        "invoice_doc"
+      ],
+      "triggers_agents": [
+        "a1"
+      ]
+    },
+    {
+      "id": "g2",
+      "objects": [
+        "validated_invoice"
+      ],
+      "triggers_agents": [
+        "a2"
+      ]
+    },
+    {
+      "id": "g3",
+      "objects": [
+        "approved_invoice",
+        "exception_flag"
+      ],
+      "triggers_agents": [
+        "a3",
+        "a3b"
+      ]
+    },
+    {
+      "id": "g4",
+      "objects": [
+        "invoice_posted"
+      ],
+      "triggers_agents": [
+        "a4"
+      ]
+    },
+    {
+      "id": "g5",
+      "objects": [
+        "payment_confirmation"
+      ],
+      "triggers_agents": [
+        "a5"
+      ]
+    },
+    {
+      "id": "g6",
+      "objects": [
+        "archived_invoice",
+        "remittance_notice"
+      ],
+      "triggers_agents": []
+    }
+  ]
+}
